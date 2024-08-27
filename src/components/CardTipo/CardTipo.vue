@@ -30,21 +30,18 @@ const matchedRange = () => {
     textColor.value = `card-text`
   }
 }
-
-
-
 onUpdated(() => {
   console.log(store.count)
   imc.value = store.count
-  // range.value = matchedRange()
+  matchedRange()
   console.log(range.value)
 })
 </script>
 <template>
-  <h1 class="text-center">{{range.color}}</h1>
+      <h6 class="text-center">{{ store.currentCount }}</h6>
   <div class="type-container">
     <div
-      :class="`card p-2 ${matchedRange?.interval == type.value ? cardColor : 'border-none'}`"
+      :class="`card p-2 ${range?.interval == type.value ? cardColor : 'border-none'}`"
       style="width: 300px"
       v-for="(type, value) in types"
       :key="value"
@@ -56,7 +53,7 @@ onUpdated(() => {
         style="height: 250px; width: 200px"
       />
       <div class="card-body">
-        <h4 :class="matchedRange?.interval == type.value ? textColor : 'card-text'">
+        <h4 :class="range?.interval == type.value ? textColor : 'card-text'">
           {{ type.title }}
         </h4>
         <h6 class="card-subtitle mb-2 text-body-secondary">{{ type.interval }}</h6>
@@ -70,7 +67,6 @@ onUpdated(() => {
   display: flex;
   flex: 1 1 auto;
   flex-direction: row;
-  align-items: flex-start;
   justify-content: space-evenly;
 }
 </style>
