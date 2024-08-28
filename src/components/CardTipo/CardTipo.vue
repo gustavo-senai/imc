@@ -38,7 +38,7 @@ onUpdated(() => {
 })
 </script>
 <template>
-      <h6 class="text-center">{{ store.currentCount }}</h6>
+  <h6 class="text-center">{{ store.currentCount }}</h6>
   <div class="type-container">
     <div
       :class="`card p-2 ${range?.interval == type.value ? cardColor : 'border-none'}`"
