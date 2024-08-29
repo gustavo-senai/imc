@@ -20,7 +20,6 @@ const imcRanges = [
 ]
 
 const matchedRange = () => {
-  console.log('aqui')
   range.value = imcRanges.find((range) => imc.value >= range.min && imc.value <= range.max)
   if (range.value) {
     cardColor.value = `border-4 border-${range.value.color}`
@@ -31,10 +30,8 @@ const matchedRange = () => {
   }
 }
 onUpdated(() => {
-  console.log(store.count)
   imc.value = store.count
   matchedRange()
-  console.log(range.value)
 })
 </script>
 <template>

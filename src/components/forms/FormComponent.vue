@@ -2,10 +2,13 @@
 import type { FormProps, FormField } from './types'
 import FormButton from '@/components/forms/FormButton.vue'
 import { userStore } from '@/stores/users'
+import { useRoute } from 'vue-router'
+import { ref } from 'vue'
 
 const props = defineProps<FormProps>()
 
 const store = userStore()
+const router = useRoute()
 
 const fields: FormField[] = props.fields.map((field) => ({
   for: field.for,
@@ -15,22 +18,11 @@ const fields: FormField[] = props.fields.map((field) => ({
   model: field.model
 }))
 
-function register(values) {
-  if (values.cpf) {
-    if (!store.isNewUser(values.email, values.cpf)) {
-      store.addUser(values.nome, values.email, values.senha, values.cpf)
-      console.log(store.users)
-    } else {
-      alert('Usuário já existente')
-    }
-  } else {
-    store.auth(values.email, values.senha)
-  }
-}
+function submit(values)
 </script>
 
 <template>
-  <VeeForm :validation-schema="props.validation" @submit="register">
+  <VeeForm :validation-schema="props.validation" @submit="submit">
     <div class="mb-3" v-for="field in fields" :key="field.name">
       <label :for="field.for" class="form-label">{{ field.title }}</label>
       <VeeField :name="field.name" :bails="false" v-slot="{ field, errors }">

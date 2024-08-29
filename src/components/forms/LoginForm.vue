@@ -26,6 +26,16 @@ const rules = {
   email: 'required|email',
   senha: 'required|min:10',
 }
+
+function submit(values) {
+  console.log('aqui')
+  if (!store.isNewUser(values.email, values.cpf)) {
+    store.addUser(values.nome, values.email, values.senha, values.cpf)
+    router.push('/calculadora')
+  } else {
+     return alert('Usuário já existente')
+  }
+}
 </script>
 <template>
   <FormComponent :fields="loginFields" :validation="rules" button-text="Login" />

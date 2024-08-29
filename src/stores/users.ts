@@ -51,7 +51,7 @@ export const userStore = defineStore('counter', () => {
     const userTryingToLogin =
       users.find((user) => user.email === email)
     if (userTryingToLogin.senha == password) {
-      console.log('adicionar rota de login')
+      return true
     } else {
       alert('Email ou senha incorretos')
       failCounter.value++

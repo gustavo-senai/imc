@@ -11,7 +11,6 @@ const isLoginPage = ref(true)
  if(route.path != '/') {
   isLoginPage.value = false
 }
-console.log(isLoginPage.value)
 </script>
 
 <template>
