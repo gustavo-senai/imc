@@ -31,7 +31,7 @@ const loginFields = [
 ]
 
 const rules = {
-  email: 'required|min:7|max:100|email',
+  email: 'required|email',
   senha: 'required|min:10',
   passwordConfirm: 'confirmed:@senha',
 }

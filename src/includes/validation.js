@@ -43,7 +43,11 @@ export default {
           : `O campo ${ctx.field} é inválido`
 
         return message
-      }
+      },
+      validateOnBlur: true,
+      validateOnChange: true,
+      validateOnInput: false,
+      validateOnModelUpdate: true,
     })
   }
 }

@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { FormProps, FormField } from './types'
+import type { FormProps, FormField } from './types'
 import FormButton from '@/components/forms/FormButton.vue'
+import { userStore } from '@/stores/users'
 
 const props = defineProps<FormProps>()
+
+const store = userStore()
 
 const fields: FormField[] = props.fields.map((field) => ({
   for: field.for,
@@ -13,7 +16,16 @@ const fields: FormField[] = props.fields.map((field) => ({
 }))
 
 function register(values) {
-  console.log(values)
+  if (values.cpf) {
+    if (!store.isNewUser(values.email)) {
+      store.addUser(values.nome, values.email, values.senha, values.cpf)
+      console.log(store.users)
+    } else {
+      alert('Já existe um usuário com este email')
+    }
+  } else {
+    store.auth(values.email, values.senha)
+  }
 }
 </script>
 
@@ -23,10 +35,10 @@ function register(values) {
       <label :for="field.for" class="form-label">{{ field.title }}</label>
       <VeeField :name="field.name" :bails="false" v-slot="{ field, errors }">
         <input
+          :id="field.for"
           :type="field.type"
           v-model="field.model"
           class="form-control"
-          :id="field.for"
           v-bind="field"
         />
         <div class="text-danger" v-for="(error, index) in errors" :key="index">
