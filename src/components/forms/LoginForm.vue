@@ -4,7 +4,6 @@ import { ref } from 'vue'
 
 const email = ref('')
 const password = ref('')
-const confirmPassword = ref('')
 
 const loginFields = [
   {
@@ -20,20 +19,12 @@ const loginFields = [
     name: 'senha',
     title: 'Senha',
     model: password.value
-  },
-  {
-    for: 'inputPasswordConfirm',
-    type: 'password',
-    name: 'passwordConfirm',
-    title: 'Confirmar senha',
-    model: confirmPassword.value,
   }
 ]
 
 const rules = {
   email: 'required|email',
   senha: 'required|min:10',
-  passwordConfirm: 'confirmed:@senha',
 }
 </script>
 <template>

@@ -1,9 +1,4 @@
-import {
-  Form as VeeForm,
-  Field as VeeField,
-  defineRule,
-  configure
-} from 'vee-validate'
+import { Form as VeeForm, Field as VeeField, defineRule, configure } from 'vee-validate'
 import {
   required,
   min,
@@ -11,7 +6,9 @@ import {
   alpha_spaces as alphaSpaces,
   email,
   confirmed,
-  regex, digits
+  regex,
+  digits,
+  integer
 } from '@vee-validate/rules'
 
 export default {
@@ -27,6 +24,7 @@ export default {
     defineRule('confirmed', confirmed)
     defineRule('regex', regex)
     defineRule('digits', digits)
+    defineRule('integer', integer)
 
     configure({
       generateMessage: (ctx) => {
@@ -36,7 +34,8 @@ export default {
           email: `O campo ${ctx.field} deve conter um email valido`,
           confirmed: 'Suas senhas estão diferentes',
           alpha_spaces: `O campo ${ctx.field} deve conter apenas letras e espaços`,
-          digits: `O campo ${ctx.field} deve conter exatamente 11 dígitos`
+          digits: `O campo ${ctx.field} deve conter exatamente 11 dígitos`,
+          integer: `O campo ${ctx.field} deve conter apenas números`
         }
         const message = messages[ctx.rule.name]
           ? messages[ctx.rule.name]
@@ -47,7 +46,7 @@ export default {
       validateOnBlur: true,
       validateOnChange: true,
       validateOnInput: false,
-      validateOnModelUpdate: true,
+      validateOnModelUpdate: true
     })
   }
 }

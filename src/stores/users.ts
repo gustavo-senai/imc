@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import User from '@/classes/User'
+import { ref } from 'vue'
 
 export const userStore = defineStore('counter', () => {
   const users = [
@@ -35,8 +36,10 @@ export const userStore = defineStore('counter', () => {
     }
   ]
 
-  function isNewUser(email: string) {
-    return users.some((user) => user.email === email)
+  const failCounter = ref(0)
+
+  function isNewUser(email: string, cpf: number) {
+    return users.some((user) => user.email === email || user.cpf === cpf)
   }
 
   function addUser(name: string, email: string, password: string, cpf: number) {
@@ -45,11 +48,13 @@ export const userStore = defineStore('counter', () => {
   }
 
   function auth(email: string, password: string) {
-    const userTryingToLogin = users.find((user) => user.email === email)
-    if (userTryingToLogin.senha === password) {
+    const userTryingToLogin =
+      users.find((user) => user.email === email)
+    if (userTryingToLogin.senha == password) {
       console.log('adicionar rota de login')
     } else {
       alert('Email ou senha incorretos')
+      failCounter.value++
     }
   }
 

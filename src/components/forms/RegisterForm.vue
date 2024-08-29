@@ -48,9 +48,9 @@ const loginFields = [
 
 const rules = {
   nome: 'required|alpha_spaces',
-  cpf: 'required|digits:11',
+  cpf: 'required|digits:11|integer',
   email: 'required|max:100|email',
-  senha: 'required|min:10',
+  senha: 'required|min:7',
   passwordConfirm: 'confirmed:@senha',
 }
 </script>

@@ -15,29 +15,31 @@ function calculate() {
     alert('Informe seu peso e altura para calcular o IMC')
   }
 }
+
 onUnmounted(store.resetCount())
 </script>
 
 <template>
-  <div class="calculator-container p-4 mx-auto my-4">
+  <div class="calculator-container p-4 mx-auto my-5">
     <div class="input-group mb-3">
-      <span class="input-group-text">Peso(Kg)</span>
-      <input v-model="weight" type="number" class="form-control" />
+      <span class="input-group-text border border-success">Peso(Kg)</span>
+      <input v-model="weight" type="number" class="form-control border border-success" />
     </div>
     <div class="input-group mb-3">
-      <span class="input-group-text">Altura(m)</span>
-      <input v-model="height" type="number" class="form-control" />
+      <span class="input-group-text border border-success">Altura(m)</span>
+      <input v-model="height" type="number" class="form-control border border-success" />
     </div>
-    <button type="button" class="btn btn-secondary" @click="calculate">Calcular IMC</button>
+    <button type="button" class="btn btn-success" @click="calculate">Calcular IMC</button>
   </div>
 </template>
 
 <style scoped lang="scss">
 .calculator-container {
-  border: 3px solid black;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 50vh;
+  border: 3px solid #198754;
+  border-radius: 15px;
 }
 </style>

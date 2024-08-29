@@ -1,22 +1,36 @@
 <script setup lang="ts">
 import LoginForm from '@/components/forms/LoginForm.vue'
+import { useRoute } from 'vue-router'
+import { ref } from 'vue'
+import RegisterForm from '@/components/forms/RegisterForm.vue'
+
+const route = useRoute()
+
+const isLoginPage = ref(true)
+
+ if(route.path != '/') {
+  isLoginPage.value = false
+}
+console.log(isLoginPage.value)
 </script>
 
 <template>
   <div class="container-initial">
     <div class="left-column">
-      <header class="header">
+      <header class="header text-success">
         <img src="../assets/img/bmi.png" alt="" style="height: 50px; width: 50px" />
-        <h1 class="display-6 m-3">Calculadora IMC</h1>
+        <h1 class="m-3">Calculadora IMC</h1>
       </header>
-      <LoginForm class="login-form" />
+      <LoginForm v-if="isLoginPage" class="page-form" />
+      <RegisterForm v-else class="page-form" />
     </div>
     <div class="middle-gradient"></div>
     <div class="right-column">
       <header class="header">
         <ul class="nav justify-content-center">
           <li class="nav-item">
-            <a class="h4 m-3 text-success" href="register">Cadastrar</a>
+            <a v-if="isLoginPage" class="h4 m-3 text-success" href="register">Cadastrar</a>
+            <a v-else class="h4 m-3 text-success" href="/">Login</a>
           </li>
           <li class="nav-item">
             <a class="h4 m-3 text-success" href="equipe">Equipe</a>
@@ -40,28 +54,30 @@ import LoginForm from '@/components/forms/LoginForm.vue'
   display: flex;
   flex-direction: row;
   height: 100vh;
+  font-family: "SUSE", sans-serif;
 }
 
 .left-column {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 50vw;
   background-color: #d8d8d7;
 
-  .login-form {
+  .page-form {
     display: flex;
     flex-direction: column;
     width: 25vw;
-    align-self: center;
   }
 }
 
 .header {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: flex-start !important;
   align-items: center;
-  margin: 5px 0 250px 25px;
+  margin: 5px 0 20px 25px;
 }
 
 .middle-gradient {
@@ -79,7 +95,6 @@ import LoginForm from '@/components/forms/LoginForm.vue'
 
   .header {
     margin: 50px 0 150px 25px;
-    font-family: "SUSE", sans-serif;
     font-weight: 800;
   }
 }

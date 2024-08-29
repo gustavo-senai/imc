@@ -17,11 +17,11 @@ const fields: FormField[] = props.fields.map((field) => ({
 
 function register(values) {
   if (values.cpf) {
-    if (!store.isNewUser(values.email)) {
+    if (!store.isNewUser(values.email, values.cpf)) {
       store.addUser(values.nome, values.email, values.senha, values.cpf)
       console.log(store.users)
     } else {
-      alert('Já existe um usuário com este email')
+      alert('Usuário já existente')
     }
   } else {
     store.auth(values.email, values.senha)
