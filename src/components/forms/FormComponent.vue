@@ -1,24 +1,27 @@
 <script setup lang="ts">
-import type { FormProps, FormField } from './types'
+import type { FormProps } from './types'
 import FormButton from '@/components/forms/FormButton.vue'
-import { userStore } from '@/stores/users'
-import { useRoute } from 'vue-router'
-import { ref } from 'vue'
+import { reactive } from 'vue'
 
 const props = defineProps<FormProps>()
+const emit = defineEmits<{
+  (e: 'submit', values: Record<string, any>): void
+}>()
 
-const store = userStore()
-const router = useRoute()
+const fields = reactive(
+  props.fields.map((field) => ({
+    for: field.for,
+    type: field.type,
+    name: field.name,
+    title: field.title,
+    model: field.model
+  }))
+)
 
-const fields: FormField[] = props.fields.map((field) => ({
-  for: field.for,
-  type: field.type,
-  name: field.name,
-  title: field.title,
-  model: field.model
-}))
-
-function submit(values)
+function submit(values) {
+  emit('submit', values)
+  console.log('emitido', values)
+}
 </script>
 
 <template>

@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import FormComponent from '@/components/forms/FormComponent.vue'
+import router from '@/router';
+import { userStore } from '@/stores/users';
 import { ref } from 'vue'
 
-const name = ref('')
+const store = userStore()
+
+const name = ref()
 const cpf = ref()
-const email = ref('')
-const password = ref('')
-const confirmPassword = ref('')
+const email = ref()
+const password = ref()
+const confirmPassword = ref()
 
 const loginFields = [
   {
@@ -14,35 +18,35 @@ const loginFields = [
     type: 'text',
     name: 'nome',
     title: 'Nome',
-    model: name.value
+    model: name
   },
   {
     for: 'inputCpf',
     type: 'number',
     name: 'cpf',
     title: 'Cpf',
-    model: cpf.value
+    model: cpf
   },
   {
     for: 'inputEmail',
     type: 'email',
     name: 'email',
     title: 'Email',
-    model: email.value
+    model: email
   },
   {
     for: 'inputPassword',
     type: 'password',
     name: 'senha',
     title: 'Senha',
-    model: password.value
+    model: password
   },
   {
     for: 'inputPasswordConfirm',
     type: 'password',
     name: 'passwordConfirm',
     title: 'Confirmar senha',
-    model: confirmPassword.value,
+    model: confirmPassword
   }
 ]
 
@@ -53,8 +57,18 @@ const rules = {
   senha: 'required|min:7',
   passwordConfirm: 'confirmed:@senha',
 }
+
+function register(values) {
+  
+  if(store.isNewUser(email.value, cpf.value)) {
+    router.push('/calculadora')
+  }
+  else {
+    alert('Já existe um usuário com esse e-mail e/ou CPF')
+  }
+}
 </script>
 
 <template>
-  <FormComponent :fields="loginFields" :validation="rules" button-text="Cadastrar" />
+  <FormComponent :fields="loginFields" :validation="rules" button-text="Cadastrar" @submit="register()" />
 </template>

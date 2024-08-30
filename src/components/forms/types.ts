@@ -1,5 +1,3 @@
-import type { RouteLocationRaw } from 'vue-router'
-
 export interface FormField {
   for: string;
   type: string;
@@ -12,5 +10,4 @@ export interface FormProps {
   fields: FormField[];
   validation: {}
   buttonText: string;
-  to: RouteLocationRaw
 }

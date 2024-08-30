@@ -39,7 +39,7 @@ export const userStore = defineStore('counter', () => {
   const failCounter = ref(0)
 
   function isNewUser(email: string, cpf: number) {
-    return users.some((user) => user.email === email || user.cpf === cpf)
+    return users.some((user) => user.email === email || user.cpf == cpf)
   }
 
   function addUser(name: string, email: string, password: string, cpf: number) {
@@ -50,11 +50,11 @@ export const userStore = defineStore('counter', () => {
   function auth(email: string, password: string) {
     const userTryingToLogin =
       users.find((user) => user.email === email)
-    if (userTryingToLogin.senha == password) {
+    if (userTryingToLogin?.senha == password) {
       return true
     } else {
-      alert('Email ou senha incorretos')
       failCounter.value++
+      return false
     }
   }
 

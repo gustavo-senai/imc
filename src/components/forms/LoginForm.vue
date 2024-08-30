@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import FormComponent from '@/components/forms/FormComponent.vue'
 import { ref } from 'vue'
+import { userStore } from '@/stores/users'
+import router from '@/router'
+
+const store = userStore()
 
 const email = ref('')
 const password = ref('')
@@ -11,14 +15,14 @@ const loginFields = [
     type: 'email',
     name: 'email',
     title: 'Email',
-    model: email.value
+    model: email
   },
   {
     for: 'inputPassword',
     type: 'password',
     name: 'senha',
     title: 'Senha',
-    model: password.value
+    model: password
   }
 ]
 
@@ -27,16 +31,22 @@ const rules = {
   senha: 'required|min:10',
 }
 
-function submit(values) {
-  console.log('aqui')
-  if (!store.isNewUser(values.email, values.cpf)) {
-    store.addUser(values.nome, values.email, values.senha, values.cpf)
+function login(values) {
+  console.log('Valores recebidos:', values)
+  email.value = values.email
+  password.value = values.senha
+  const authenticate = store.auth(email.value, password.value)
+  console.log(authenticate)
+  if (authenticate) {
     router.push('/calculadora')
   } else {
-     return alert('Usuário já existente')
+    email.value = ''
+    password.value = ''
+    alert('E-mail ou senha incorretos')
   }
 }
 </script>
+
 <template>
-  <FormComponent :fields="loginFields" :validation="rules" button-text="Login" />
+  <FormComponent :fields="loginFields" :validation="rules" button-text="Login" @submit="login" />
 </template>
