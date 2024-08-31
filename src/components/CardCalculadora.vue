@@ -16,7 +16,7 @@ function calculate() {
   }
 }
 
-onUnmounted(store.resetCount())
+onUnmounted(() => store.resetCount())
 </script>
 
 <template>

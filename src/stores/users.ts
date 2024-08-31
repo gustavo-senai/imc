@@ -39,6 +39,7 @@ export const userStore = defineStore('counter', () => {
   const failCounter = ref(0)
 
   function isNewUser(email: string, cpf: number) {
+    console.log(email)
     return users.some((user) => user.email === email || user.cpf == cpf)
   }
 

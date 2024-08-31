@@ -32,7 +32,6 @@ const rules = {
 }
 
 function login(values) {
-  console.log('Valores recebidos:', values)
   email.value = values.email
   password.value = values.senha
   const authenticate = store.auth(email.value, password.value)

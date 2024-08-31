@@ -59,16 +59,22 @@ const rules = {
 }
 
 function register(values) {
-  
-  if(store.isNewUser(email.value, cpf.value)) {
-    router.push('/calculadora')
+  console.log('valor recebido',values)
+  name.value = values.name
+  cpf.value = values.cpf
+  email.value = values.email 
+  password.value = values.password
+  confirmPassword.value = values.confirmPassword
+  console.log(store.isNewUser(values.name, values.cpf))
+  if(store.isNewUser(values.email, values.cpf)) {
+    alert('Já existe um usuário com esse e-mail e/ou CPF')
   }
   else {
-    alert('Já existe um usuário com esse e-mail e/ou CPF')
+    router.push('/calculadora')
   }
 }
 </script>
 
 <template>
-  <FormComponent :fields="loginFields" :validation="rules" button-text="Cadastrar" @submit="register()" />
+  <FormComponent :fields="loginFields" :validation="rules" button-text="Cadastrar" @submit="register" />
 </template>
