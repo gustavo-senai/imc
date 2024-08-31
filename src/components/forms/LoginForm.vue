@@ -34,7 +34,7 @@ const rules = {
 function login(values) {
   email.value = values.email
   password.value = values.senha
-  const authenticate = store.auth(email.value, password.value)
+  const authenticate = store.auth(values.email, values.senha)
   console.log(authenticate)
   if (authenticate) {
     router.push('/calculadora')
