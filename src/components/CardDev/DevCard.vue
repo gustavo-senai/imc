@@ -33,6 +33,7 @@ import devs from './devs';
   flex: 1 1 auto;
   flex-direction: row;
   justify-content: space-evenly;
+  align-items: center;
 }
 .link-card {
   display: flex;

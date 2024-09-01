@@ -81,7 +81,7 @@ const devs = [
       {
         url: '',
         logo: linkedinLogo,
-        nickname: ''
+        nickname: 'Luan Ramos'
       },
       {
         url: 'https://www.instagram.com/luan048_',

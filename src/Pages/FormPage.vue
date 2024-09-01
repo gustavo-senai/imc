@@ -74,7 +74,6 @@ const isLoginPage = ref(true)
 .header {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start !important;
   align-items: center;
   margin: 5px 0 20px 25px;
 }
@@ -93,7 +92,7 @@ const isLoginPage = ref(true)
   background-color: #bfbbbb;
 
   .header {
-    margin: 50px 0 150px 25px;
+    margin: 50px 0 120px 25px;
     font-weight: 800;
   }
 }
